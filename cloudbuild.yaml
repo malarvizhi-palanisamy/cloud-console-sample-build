@@ -6,6 +6,7 @@ steps:
       - 'asia-south1-docker.pkg.dev/$PROJECT_ID/cloud-build-repo/helloworld-image:v3'
       - '.'
 
+
 images:
   - 'asia-south1-docker.pkg.dev/$PROJECT_ID/cloud-build-repo/helloworld-image:v3'
 
