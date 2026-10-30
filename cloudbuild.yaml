@@ -1,4 +1,6 @@
+
 steps:
+  # Step 1: Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
@@ -6,6 +8,17 @@ steps:
       - 'asia-south1-docker.pkg.dev/$PROJECT_ID/cloud-build-repo/helloworld-image:v3'
       - '.'
 
+  # Step 2: Deploy image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'cloud-console-app'
+      - '--image=asia-south1-docker.pkg.dev/$PROJECT_ID/cloud-build-repo/helloworld-image:v3'
+      - '--region=asia-south1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
 
 images:
   - 'asia-south1-docker.pkg.dev/$PROJECT_ID/cloud-build-repo/helloworld-image:v3'
