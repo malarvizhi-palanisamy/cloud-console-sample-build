@@ -8,7 +8,13 @@ steps:
       - 'asia-south1-docker.pkg.dev/$PROJECT_ID/cloud-build-repo/helloworld-image:v3'
       - '.'
 
-  # Step 2: Deploy image to Cloud Run
+  # Step 2: Push image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/cloud-build-repo/helloworld-image:v3'
+
+  # Step 3: Deploy image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args:
@@ -25,7 +31,7 @@ images:
 
 tags:
   - 'gcp-cloud-build-sample-build'
-  
+
 options:
   logging: CLOUD_LOGGING_ONLY
-  pubsubTopic: projects/devops-project1-512907/topics/cloud-builds
+  pubsubTopic: 'projects/devops-project1-512907/topics/cloud-builds'
