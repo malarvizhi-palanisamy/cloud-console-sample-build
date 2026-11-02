@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello from Cloud Run!"
+    return "Hello from Cloud Run for monitoring and logging!"
 
 @app.route("/health")
 def health():
